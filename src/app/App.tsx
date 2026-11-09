@@ -26,37 +26,37 @@ import proofReview3 from '../imports/Screenshot_2025_02_04_11_05_01_43_f598e1360
 import faq4Audio from '../imports/faq4-bangalore-girls.mp3.mp3';
 import faq5Audio from '../imports/faq5-how-to-join.mp3.mp3';
 
-const B1        = '#1944F1';
-const B2        = '#0F2DBB';
-const ACCENT    = '#FFD700';
+const B1        = '#25D366';
+const B2        = '#128C7E';
+const ACCENT    = '#25D366';
 const HERO_GRAD = B1;
 
 // Separate desktop and mobile prices; UPI requests use the matching amount.
 const PRICING = {
-  desktop: { amount: '1999', original: '3999' },
-  mobile:  { amount: '999', original: '1999' },
+  desktop: { amount: '199', original: '599' },
+  mobile:  { amount: '199', original: '599' },
 } as const;
 type PricingDevice = keyof typeof PRICING;
 const formatPrice = (value: string) => `₹${Number(value).toLocaleString('en-IN')}`;
 
 // ─── Theme system ─────────────────────────────────────────────────────────────
 const DARK_THEME = {
-  PAGE_BG:  '#000000',
-  DARK:     '#F5F3F3',
-  MUTED:    '#7A88AA',
-  CARD_BG:  '#0D0D0D',
-  BORDER:   'rgba(255,255,255,0.07)',
-  QUOTE:    '#C0C8E8',
-  DOT_BG: '#000000',
+  PAGE_BG:  '#050805',
+  DARK:     '#F5FFF8',
+  MUTED:    '#A2B8A8',
+  CARD_BG:  '#0D160F',
+  BORDER:   'rgba(37,211,102,0.18)',
+  QUOTE:    '#D3E8D9',
+  DOT_BG:   '#050805',
 };
 const LIGHT_THEME = {
-  PAGE_BG:  '#F5F3F3',
-  DARK:     '#08122A',
-  MUTED:    '#5A6899',
+  PAGE_BG:  '#FFFFFF',
+  DARK:     '#10251A',
+  MUTED:    '#597262',
   CARD_BG:  '#FFFFFF',
-  BORDER:   'rgba(25,68,241,0.12)',
-  QUOTE:    '#1A2A60',
-  DOT_BG: '#F5F3F3',
+  BORDER:   'rgba(18,140,126,0.17)',
+  QUOTE:    '#284B36',
+  DOT_BG:   '#FFFFFF',
 };
 type TTheme = typeof DARK_THEME & { isDark: boolean };
 const ThemeCtx = React.createContext<{ theme: TTheme; toggle: () => void }>({
@@ -66,18 +66,18 @@ const useT = (): TTheme => React.useContext(ThemeCtx).theme;
 // Dot-grid page background (white dots on dark, blue dots on light)
 const dotGridStyle = (T: TTheme): React.CSSProperties => ({
   backgroundColor: T.DOT_BG,
-  backgroundImage: `radial-gradient(${T.isDark ? 'rgba(255,255,255,0.14)' : 'rgba(25,68,241,0.20)'} 1px, transparent 1.2px)`,
+  backgroundImage: `radial-gradient(${T.isDark ? 'rgba(255,255,255,0.14)' : 'rgba(37,211,102,0.20)'} 1px, transparent 1.2px)`,
   backgroundSize: '24px 24px',
 });
 
 function ThemeProvider({ children }: { children: React.ReactNode }) {
   const isNight = () => { const h = new Date().getHours(); return h < 6 || h >= 20; };
   const [isDark, setIsDark] = useState(() => {
-    const s = localStorage.getItem('ds_theme');
+    const s = localStorage.getItem('dc_theme');
     return s ? s === 'dark' : isNight();
   });
   const toggle = () => setIsDark(p => {
-    localStorage.setItem('ds_theme', !p ? 'dark' : 'light');
+    localStorage.setItem('dc_theme', !p ? 'dark' : 'light');
     return !p;
   });
   const theme = { ...(isDark ? DARK_THEME : LIGHT_THEME), isDark };
@@ -90,10 +90,10 @@ function ThemeToggle() {
     <motion.button
       onClick={toggle} whileTap={{ scale: 0.9 }}
       className="fixed top-3 right-3 z-50 w-8 h-8 rounded-full flex items-center justify-center shadow-lg"
-      style={{ background: theme.isDark ? 'rgba(255,255,255,0.08)' : 'rgba(25,68,241,0.06)', border: `1px solid ${theme.isDark ? 'rgba(255,255,255,0.12)' : 'rgba(25,68,241,0.2)'}` }}>
+      style={{ background: theme.isDark ? 'rgba(255,255,255,0.08)' : 'rgba(37,211,102,0.06)', border: `1px solid ${theme.isDark ? 'rgba(255,255,255,0.12)' : 'rgba(37,211,102,0.2)'}` }}>
       {theme.isDark
-        ? <Sun className="w-4 h-4" style={{ color: '#FFD700' }} />
-        : <Moon className="w-4 h-4" style={{ color: '#1944F1' }} />}
+        ? <Sun className="w-4 h-4" style={{ color: '#25D366' }} />
+        : <Moon className="w-4 h-4" style={{ color: '#25D366' }} />}
     </motion.button>
   );
 }
@@ -105,10 +105,10 @@ const CARD_BG = DARK_THEME.CARD_BG;
 const DOT_BG  = DARK_THEME.DOT_BG;
 
 const FEAT: { icon: React.ElementType; title: string; desc: string; badge?: string; c1: string; c2: string }[] = [
-  { icon: MessageCircle, title: 'Group Chat',         desc: 'Daily active members',        c1: '#3B82F6', c2: '#06B6D4' },
-  { icon: Phone,         title: 'Voice Calls',        desc: 'Talk before you meet',        c1: '#FF6B6B', c2: '#FF8E53' },
-  { icon: MapPin,        title: 'Direct Meets',       desc: 'Arrange real-life meetups',   c1: '#10B981', c2: '#34D399' },
-  { icon: Flame,         title: '18+ Exclusive',      desc: 'Photos, videos & more',       c1: '#EF4444', c2: '#F97316', badge: '18+' },
+  { icon: MessageCircle, title: 'Group Chat',         desc: 'Daily active members',        c1: '#25D366', c2: '#128C7E' },
+  { icon: Phone,         title: 'Voice Calls',        desc: 'Talk before you meet',        c1: '#3DAF78', c2: '#1EAD64' },
+  { icon: MapPin,        title: 'Direct Meets',       desc: 'Arrange real-life meetups',   c1: '#1FAF66', c2: '#45D889' },
+  { icon: Flame,         title: '18+ Exclusive',      desc: 'Photos, videos & more',       c1: '#148F59', c2: '#28A967', badge: '18+' },
 ];
 
 const IMAGES   = [galleryImg1, galleryImg2, galleryImg3, galleryImg4, galleryImg5, galleryImg6];
@@ -127,30 +127,6 @@ const REVIEWS = [
   { name: 'Sagar R.',       area: 'Electronic City', text: 'Legit group. Admin does proper verification so you know everyone is genuine. No nonsense.' },
   { name: 'Nikhil T.',      area: 'Yelahanka',    text: 'Joined on a friend\'s suggestion and I\'m glad I did. Active daily, good conversations and easy to arrange meets.' },
 ];
-
-// ─── Diwali ornaments ─────────────────────────────────────────────
-function Diya({ size = 22 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M12 2c2 2.6 2.6 4.4 0 6.6C9.4 6.4 10 4.6 12 2z" fill="#FF9F1C" />
-      <path d="M12 4.6c.9 1.2 1.1 2 0 3-1.1-1-.9-1.8 0-3z" fill="#FFD700" />
-      <path d="M2.5 13h19c0 4.2-4 7.5-9.5 7.5S2.5 17.2 2.5 13z" fill="#D9480F" />
-      <rect x="2.5" y="11.6" width="19" height="2" rx="1" fill="#F59E0B" />
-    </svg>
-  );
-}
-
-function DiwaliOrnaments() {
-  return (
-    <div className="flex items-center justify-center gap-2" aria-hidden="true">
-      <Diya />
-      <Sparkles className="w-3.5 h-3.5" style={{ color: '#FFD700' }} />
-      <Diya size={26} />
-      <Sparkles className="w-3.5 h-3.5" style={{ color: '#FFD700' }} />
-      <Diya />
-    </div>
-  );
-}
 
 // ─── Glassmorphic blob ────────────────────────────────────────────────────────
 function GlassBlob({ size, top, left, right, bottom, rotate = 0, rx = '62% 38% 70% 30% / 45% 55% 45% 55%' }: {
@@ -207,7 +183,7 @@ function GroupPreviewSlider({ images, mobile = false }: { images: string[]; mobi
             <div className="absolute inset-0 rounded-3xl blur-2xl opacity-30 scale-95" style={{ background: HERO_GRAD }} />
             <div
               className="relative overflow-hidden rounded-3xl shadow-2xl"
-              style={{ aspectRatio: '9/16', border: '2.5px solid rgba(25,68,241,0.2)' }}
+              style={{ aspectRatio: '9/16', border: '2.5px solid rgba(37,211,102,0.2)' }}
             >
               <AnimatePresence custom={direction} mode="popLayout">
                 <motion.img
@@ -277,6 +253,7 @@ function GroupPreviewSlider({ images, mobile = false }: { images: string[]; mobi
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbyZ4CDmSSpm80A-xyX-2f3p97vtAX_t6ny7bbUZiJPF9-apBF5DUmOAc3CjXCJ-6teo5A/exec';
 
 function LeadModal({ onClose, onComplete, gate = false }: { onClose?: () => void; onComplete: () => void; gate?: boolean }) {
+  const T = useT();
   const [name, setName]       = useState('');
   const [phone, setPhone]     = useState('');
   const [loading, setLoading] = useState(false);
@@ -298,9 +275,9 @@ function LeadModal({ onClose, onComplete, gate = false }: { onClose?: () => void
     try {
       const params = new URLSearchParams({ name: name.trim(), phone: phone.trim() });
       await fetch(`${SHEET_URL}?${params.toString()}`, { mode: 'no-cors' });
-      localStorage.setItem('ds_lead_submitted', '1');
-      localStorage.setItem('ds_lead_name', name.trim());
-      localStorage.setItem('ds_lead_phone', phone.trim());
+      localStorage.setItem('dc_lead_submitted', '1');
+      localStorage.setItem('dc_lead_name', name.trim());
+      localStorage.setItem('dc_lead_phone', phone.trim());
       onComplete();
     } catch {
       setError('Something went wrong. Please try again.');
@@ -331,8 +308,8 @@ function LeadModal({ onClose, onComplete, gate = false }: { onClose?: () => void
     <div className={`fixed inset-0 z-[999] flex items-center justify-center overflow-y-auto overflow-x-hidden px-4 py-3 sm:px-5 ${gate ? '' : 'bg-black/70'}`}
       style={{
         fontFamily: "'Plus Jakarta Sans', sans-serif",
-        backgroundColor: '#030714',
-        backgroundImage: "radial-gradient(ellipse 58% 53% at 50% 50%,rgba(25,68,241,.20),transparent 80%),radial-gradient(circle,rgba(114,130,175,.22) 1px,transparent 1px)",
+        backgroundColor: T.PAGE_BG,
+        backgroundImage: `radial-gradient(ellipse 58% 53% at 50% 50%,rgba(37,211,102,${T.isDark ? '.18' : '.09'}),transparent 80%),radial-gradient(circle,rgba(37,211,102,${T.isDark ? '.15' : '.18'}) 1px,transparent 1px)`,
         backgroundSize: 'auto, 22px 22px',
       }}>
       <motion.div className="absolute inset-0" initial={{ opacity: 0 }} animate={{ opacity: 1 }} onClick={gate ? undefined : onClose} />
@@ -349,9 +326,9 @@ function LeadModal({ onClose, onComplete, gate = false }: { onClose?: () => void
               left: photo.side === 'left' ? (photo.near ? 'calc(50% - clamp(190px, 31vw, 410px))' : 'calc(50% - clamp(300px, 42vw, 575px))') : undefined,
               right: photo.side === 'right' ? (photo.near ? 'calc(50% - clamp(190px, 31vw, 410px))' : 'calc(50% - clamp(300px, 42vw, 575px))') : undefined,
               transform: `rotate(${photo.side === 'left' ? (photo.near ? -11 : -17) : (photo.near ? 11 : 17)}deg)`,
-              border: '1px solid rgba(77,94,241,.55)',
-              boxShadow: '0 8px 35px rgba(13,33,127,.22)',
-              backgroundColor: '#071027',
+              border: '1px solid rgba(37,211,102,.55)',
+              boxShadow: '0 8px 35px rgba(8,64,32,.22)',
+              backgroundColor: '#0A1B10',
             }}>
             <AnimatePresence mode="wait">
               <motion.div key={(galleryIndex + i * 2) % 10}
@@ -364,12 +341,12 @@ function LeadModal({ onClose, onComplete, gate = false }: { onClose?: () => void
         ))}
       </div>
       <style>{`
-        @keyframes datespotPhotoLoop {
+        @keyframes dating-clubPhotoLoop {
           from { transform: translate3d(0, 0, 0); }
           to { transform: translate3d(-50%, 0, 0); }
         }
-        .datespot-photo-loop { animation: datespotPhotoLoop 42s linear infinite; will-change: transform; }
-        @media (prefers-reduced-motion: reduce) { .datespot-photo-loop { animation: none; } }
+        .dating-club-photo-loop { animation: dating-clubPhotoLoop 42s linear infinite; will-change: transform; }
+        @media (prefers-reduced-motion: reduce) { .dating-club-photo-loop { animation: none; } }
       `}</style>
 
       <div className="relative z-10 w-full max-w-[440px] max-h-[96dvh] overflow-y-auto sm:max-h-none sm:overflow-visible flex flex-col items-center gap-3 sm:block">
@@ -377,7 +354,7 @@ function LeadModal({ onClose, onComplete, gate = false }: { onClose?: () => void
         <div className="sm:hidden w-full h-[136px] shrink-0 overflow-hidden pointer-events-none" aria-hidden="true"
           style={{ WebkitMaskImage: 'linear-gradient(90deg, transparent, black 7%, black 93%, transparent)',
             maskImage: 'linear-gradient(90deg, transparent, black 7%, black 93%, transparent)' }}>
-          <div className="datespot-photo-loop inline-flex w-max h-full items-center">
+          <div className="dating-club-photo-loop inline-flex w-max h-full items-center">
             {[0, 1].map(repeat => (
               <div key={repeat} className="flex shrink-0 h-full items-center gap-2 pr-2">
                 {photoIndexes.map(i => (
@@ -386,7 +363,7 @@ function LeadModal({ onClose, onComplete, gate = false }: { onClose?: () => void
                       width: 'clamp(74px,20vw,92px)',
                       height: 'clamp(99px,26.67vw,123px)',
                       transform: `rotate(${[-5, -2, 2, 5, -3, 3, -4, 4, -2, 2][i]}deg)`,
-                      border: '1px solid rgba(78,106,255,.65)',
+                      border: '1px solid rgba(37,211,102,.65)',
                       boxShadow: '0 7px 20px rgba(0,0,0,.28)',
                       ...photoStyle(i),
                     }} />
@@ -403,37 +380,37 @@ function LeadModal({ onClose, onComplete, gate = false }: { onClose?: () => void
         transition={{ duration: 0.36, ease: [0.16, 1, 0.3, 1] }}
         role="dialog" aria-modal="true" aria-label="Enter your details"
         className="relative w-full max-w-[440px] rounded-[22px] sm:rounded-[24px] overflow-hidden shrink-0"
-        style={{ background: '#050A1A', border: '1px solid #1944F1', boxShadow: '0 28px 80px rgba(0,0,0,.75),0 0 48px rgba(25,68,241,.11)' }}>
+        style={{ background: T.CARD_BG, border: '1px solid rgba(37,211,102,.55)', boxShadow: T.isDark ? '0 28px 80px rgba(0,0,0,.55)' : '0 20px 60px rgba(10,65,30,.13)' }}>
         {!gate && <button onClick={onClose} aria-label="Close" className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center hover:bg-white/10">
-          <X className="w-4 h-4" style={{ color: '#9CA9C5' }} />
+          <X className="w-4 h-4" style={{ color: '#A2B8A8' }} />
         </button>}
         <div className="px-5 py-5 sm:px-9 sm:py-9">
           <div className="flex justify-center items-center gap-2 mb-4 sm:mb-7">
-            <img src="/datespot-logo.svg" alt="" className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl object-cover" />
-            <span className="font-extrabold text-white text-xl tracking-tight">Datespot</span>
+            <img src="/dating-club-logo.svg" alt="" className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl object-cover" />
+            <span className="font-extrabold text-xl tracking-tight" style={{ color: T.DARK }}>Dating Club</span>
           </div>
           <div className="text-center mb-5 sm:mb-6">
-            <h2 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight mb-1.5">Enter Your Details</h2>
-            <p className="text-xs sm:text-sm" style={{ color: '#A6B2CF' }}>Join now and get instant access.</p>
+            <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight mb-1.5" style={{ color: T.DARK }}>Enter Your Details</h2>
+            <p className="text-xs sm:text-sm" style={{ color: T.MUTED }}>Join now and get instant access.</p>
           </div>
           <form onSubmit={handleSubmit} className="flex flex-col gap-3.5 sm:gap-4">
             <div>
-              <label htmlFor="ds-signup-name" className="block text-[11px] font-bold uppercase tracking-wider mb-2" style={{ color: '#BCC7E3' }}>Full Name</label>
+              <label htmlFor="ds-signup-name" className="block text-[11px] font-bold uppercase tracking-wider mb-2" style={{ color: T.MUTED }}>Full Name</label>
               <input id="ds-signup-name" type="text" autoComplete="name" placeholder="Enter your full name"
                 value={name} onChange={e => setName(e.target.value)}
                 className="w-full rounded-xl px-4 py-3 sm:py-3.5 outline-none text-sm font-semibold transition-all"
-                style={{ background: '#030715', border: `1px solid ${name ? '#5474FF' : '#303A54'}`, color: '#F5F3F3', caretColor: '#1944F1' }} />
+                style={{ background: T.isDark ? '#07110A' : '#F8FFF9', border: `1px solid ${name ? B1 : (T.isDark ? '#2D4A35' : '#CFE6D5')}`, color: T.DARK, caretColor: B2 }} />
             </div>
             <div>
-              <label htmlFor="ds-signup-phone" className="block text-[11px] font-bold uppercase tracking-wider mb-2" style={{ color: '#BCC7E3' }}>Mobile Number</label>
+              <label htmlFor="ds-signup-phone" className="block text-[11px] font-bold uppercase tracking-wider mb-2" style={{ color: T.MUTED }}>Mobile Number</label>
               <div className="flex items-center rounded-xl overflow-hidden"
-                style={{ background: '#030715', border: `1px solid ${phone ? '#5474FF' : '#303A54'}` }}>
-                <span className="px-3.5 py-3 sm:py-3.5 text-sm font-bold shrink-0" style={{ color: '#B0C1EE', borderRight: '1px solid #303A54' }}>+91</span>
+                style={{ background: T.isDark ? '#07110A' : '#F8FFF9', border: `1px solid ${phone ? B1 : (T.isDark ? '#2D4A35' : '#CFE6D5')}` }}>
+                <span className="px-3.5 py-3 sm:py-3.5 text-sm font-bold shrink-0" style={{ color: T.MUTED, borderRight: `1px solid ${T.isDark ? '#2D4A35' : '#CFE6D5'}` }}>+91</span>
                 <input id="ds-signup-phone" type="tel" inputMode="numeric" autoComplete="tel-national"
                   placeholder="Enter 10-digit number" value={phone} maxLength={10}
                   onChange={e => setPhone(e.target.value.replace(/\D/g, ''))}
                   className="flex-1 min-w-0 px-3.5 py-3 sm:py-3.5 outline-none text-sm font-semibold bg-transparent"
-                  style={{ color: '#F5F3F3', caretColor: '#1944F1' }} />
+                  style={{ color: T.DARK, caretColor: B2 }} />
               </div>
             </div>
             {error && (
@@ -443,10 +420,10 @@ function LeadModal({ onClose, onComplete, gate = false }: { onClose?: () => void
             )}
             <button type="submit" disabled={loading}
               className="w-full rounded-xl py-3 sm:py-3.5 mt-1 font-extrabold text-sm flex items-center justify-center gap-2 transition-transform active:scale-[.98] disabled:opacity-70"
-              style={{ background: '#1944F1', color: '#FFFFFF', boxShadow: '0 6px 22px rgba(25,68,241,.25)' }}>
+              style={{ background: B1, color: '#063C20', boxShadow: '0 6px 22px rgba(37,211,102,.25)' }}>
               {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <><span>{gate ? 'Continue' : 'Continue to Payment'}</span><ArrowRight className="w-4 h-4" /></>}
             </button>
-            <p className="text-center text-[11px] font-medium" style={{ color: '#8999BD' }}>🔒 Your info is private &amp; never shared</p>
+            <p className="text-center text-[11px] font-medium" style={{ color: T.MUTED }}>🔒 Your info is private &amp; never shared</p>
           </form>
         </div>
       </motion.div>
@@ -460,9 +437,9 @@ function StatsRow({ onJoin }: { onJoin: () => void }) {
   const [idx, setIdx] = useState(0);
   const items = [
     { value: '100+', label: 'Members', icon: Users, c1: B1, c2: B2 },
-    { value: 'Daily', label: 'Active', icon: Zap, c1: '#10B981', c2: '#34D399' },
-    { value: '100%', label: 'Verified', icon: Shield, c1: '#8B5CF6', c2: '#C084FC' },
-    { value: '18+', label: 'Content', icon: Flame, c1: '#EF4444', c2: '#F97316' },
+    { value: 'Daily', label: 'Active', icon: Zap, c1: '#1FAF66', c2: '#45D889' },
+    { value: '100%', label: 'Verified', icon: Shield, c1: '#168B5E', c2: '#4DCC88' },
+    { value: '18+', label: 'Content', icon: Flame, c1: '#148F59', c2: '#28A967' },
   ];
   useEffect(() => {
     const t = setInterval(() => setIdx(p => (p + 1) % items.length), 2400);
@@ -475,7 +452,7 @@ function StatsRow({ onJoin }: { onJoin: () => void }) {
 }
 
 // ─── Reviews Slider ───────────────────────────────────────────────────────────
-const AVATAR_COLORS = ['#1944F1', '#4F46E5', '#0EA5E9', '#6366F1', '#0F2DBB', '#3B82F6', '#2563EB', '#7C3AED', '#1D4ED8', '#0284C7'];
+const AVATAR_COLORS = ['#25D366', '#198F64', '#2CB77B', '#149D65', '#128C7E', '#25D366', '#168F59', '#279E75', '#187A55', '#128C7E'];
 
 function ReviewsStrip() {
   const [current, setCurrent] = useState(0);
@@ -551,10 +528,10 @@ function StatsSection() {
   const T = useT();
   const s1 = useCountUp(548); const s2 = useCountUp(467); const s3 = useCountUp(1000); const s4 = useCountUp(95);
   const stats = [
-    { ref: s1.ref, val: s1.val, suffix: '+', label: 'Members', c1: B1, c2: '#FF6B35' },
-    { ref: s2.ref, val: s2.val, suffix: '',  label: 'Online Today', c1: '#10B981', c2: '#34D399' },
-    { ref: s3.ref, val: s3.val, suffix: '+', label: 'Successful Joins', c1: '#EC4899', c2: '#FF1F4B' },
-    { ref: s4.ref, val: s4.val, suffix: '%', label: 'Positive Reviews', c1: '#F59E0B', c2: '#FCD34D' },
+    { ref: s1.ref, val: s1.val, suffix: '+', label: 'Members', c1: B1, c2: '#26B46C' },
+    { ref: s2.ref, val: s2.val, suffix: '',  label: 'Online Today', c1: '#1FAF66', c2: '#45D889' },
+    { ref: s3.ref, val: s3.val, suffix: '+', label: 'Successful Joins', c1: '#23A66B', c2: '#21B77B' },
+    { ref: s4.ref, val: s4.val, suffix: '%', label: 'Positive Reviews', c1: '#25D366', c2: '#78E6A1' },
   ];
   return (
     <section className="py-5">
@@ -571,9 +548,9 @@ function StatsSection() {
 function HowItWorks({ onJoin }: { onJoin: () => void }) {
   const T = useT();
   const steps = [
-    { icon: CreditCard, label: 'Pay Entry Fee', desc: `One-time ${formatPrice(PRICING.mobile.amount)} payment via UPI`, c1: B1, c2: '#FF6B35' },
-    { icon: Send,       label: 'Join Datespot', desc: 'Receive the Telegram group link instantly', c1: '#10B981', c2: '#34D399' },
-    { icon: Heart,      label: 'Start Dating',  desc: 'Chat, call & meet verified women', c1: '#EC4899', c2: '#F97316' },
+    { icon: CreditCard, label: 'Pay Entry Fee', desc: `One-time ${formatPrice(PRICING.mobile.amount)} payment via UPI`, c1: B1, c2: '#26B46C' },
+    { icon: Send,       label: 'Join Dating Club', desc: 'Receive the Telegram group link instantly', c1: '#1FAF66', c2: '#45D889' },
+    { icon: Heart,      label: 'Start Dating',  desc: 'Chat, call & meet verified women', c1: '#23A66B', c2: '#28A967' },
   ];
   return (
     <section className="py-5">
@@ -616,10 +593,10 @@ function HowItWorks({ onJoin }: { onJoin: () => void }) {
 function WhyTrust() {
   const T = useT();
   const cards = [
-    { icon: UserCheck,  title: 'Manual Profile Verification', desc: 'Every member is verified by admin before getting access.', c1: B1, c2: '#FF6B35' },
-    { icon: Users,      title: 'Active Bangalore Community',  desc: '548+ real members from Bangalore, active daily.', c1: '#10B981', c2: '#34D399' },
-    { icon: Shield,     title: 'No Fake Profiles Policy',     desc: 'Instant removal of any fake or spam profiles.', c1: '#8B5CF6', c2: '#C084FC' },
-    { icon: Headphones, title: 'Direct Admin Support',        desc: 'Get help from Subhash directly, fast response guaranteed.', c1: '#EC4899', c2: '#F97316' },
+    { icon: UserCheck,  title: 'Manual Profile Verification', desc: 'Every member is verified by admin before getting access.', c1: B1, c2: '#26B46C' },
+    { icon: Users,      title: 'Active Bangalore Community',  desc: 'An active community for people in Bangalore.', c1: '#1FAF66', c2: '#45D889' },
+    { icon: Shield,     title: 'No Fake Profiles Policy',     desc: 'Instant removal of any fake or spam profiles.', c1: '#168B5E', c2: '#4DCC88' },
+    { icon: Headphones, title: 'Direct Admin Support',        desc: 'Get help from Subhash directly, fast response guaranteed.', c1: '#23A66B', c2: '#28A967' },
   ];
   return (
     null
@@ -643,13 +620,13 @@ function TrustProof() {
   const dragStart = useRef(0);
 
   const proofCards = [
-    { img: proofPayment, label: 'Payment Confirmed', emoji: '✅', color: '#10B981',
+    { img: proofPayment, label: 'Payment Confirmed', emoji: '✅', color: '#1FAF66',
       review: REVIEWS[0] },
-    { img: proofReview1, label: 'Member Review',     emoji: '⭐', color: '#F59E0B',
+    { img: proofReview1, label: 'Member Review',     emoji: '⭐', color: '#25D366',
       review: REVIEWS[2] },
     { img: proofReview2, label: 'Community Active',  emoji: '💬', color: B1,
       review: REVIEWS[4] },
-    { img: proofReview3, label: 'Real Testimonial',  emoji: '🔥', color: '#EC4899',
+    { img: proofReview3, label: 'Real Testimonial',  emoji: '🔥', color: '#23A66B',
       review: REVIEWS[6] },
   ];
 
@@ -706,7 +683,7 @@ function TrustProof() {
             {/* Quote */}
             <div className="px-3.5 py-3">
               <div className="flex gap-0.5 mb-1.5">
-                {[...Array(5)].map((_, j) => <Star key={j} className="w-2.5 h-2.5 fill-current" style={{ color: '#F59E0B' }} />)}
+                {[...Array(5)].map((_, j) => <Star key={j} className="w-2.5 h-2.5 fill-current" style={{ color: '#25D366' }} />)}
               </div>
               <p className="text-[11.5px] leading-relaxed font-medium mb-2" style={{ color: T.QUOTE }}>"{r.text}"</p>
               <div className="flex items-center gap-2">
@@ -740,7 +717,7 @@ function FAQ() {
   const T = useT();
   const [open, setOpen] = useState<number | null>(null);
   const items = [
-    { q: 'Is this genuine?', a: 'Yes. Datespot has been running since 2021 with 548+ verified members. Every member is manually approved by Subhash Gowda before getting access.' },
+    { q: 'Is this genuine?', a: 'Dating Club is an admin-led Telegram community. Members must follow the group guidelines and onboarding process.' },
     { q: 'How do I get access?', a: `Pay ${formatPrice(PRICING.mobile.amount)} via UPI, upload the payment screenshot, and you receive the Telegram group link instantly. The whole process takes under 2 minutes.` },
     { q: 'Are profiles verified?', a: 'Every profile is manually verified by the admin. Fake profiles, bots, and spam accounts are removed immediately — zero tolerance policy.' },
     { q: 'Is my privacy protected?', a: 'Absolutely. Your personal details are never shared with other members. The group has strict privacy rules and all screenshots of members are prohibited.' },
@@ -767,7 +744,7 @@ function StickyCTA({ onJoin }: { onJoin: () => void }) {
           initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 80, opacity: 0 }}
           transition={{ type: 'spring', damping: 26, stiffness: 320 }}
           className="fixed bottom-0 left-0 right-0 z-40 px-4 pb-5 pt-2"
-          style={{ background: T.isDark ? '#000000' : '#F5F3F3' }}>
+          style={{ background: T.isDark ? '#000000' : '#FFFFFF' }}>
           <motion.button
             onClick={onJoin}
             whileTap={{ scale: 0.97 }}
@@ -779,7 +756,7 @@ function StickyCTA({ onJoin }: { onJoin: () => void }) {
               transition={{ duration: 2, repeat: Infinity, repeatDelay: 1.4, ease: 'easeInOut' }}
               style={{ background: 'rgba(255,255,255,0.14)', width: '60%' }} />
             <div className="relative flex items-center justify-center gap-3 py-3.5 px-6">
-              <span className="font-black text-white text-sm tracking-tight">Join Datespot</span>
+              <span className="font-black text-white text-sm tracking-tight">Join Dating Club</span>
               <span className="text-white/75 text-[11px] line-through font-semibold">{formatPrice(PRICING.mobile.original)}</span>
               <span className="font-black text-white text-sm">{formatPrice(PRICING.mobile.amount)}</span>
               <ArrowRight className="w-4 h-4 text-white" />
@@ -802,7 +779,7 @@ function MobileApp() {
 
   const handleJoin = (type: 'full' | 'demo') => {
     setPaymentType(type);
-    if (localStorage.getItem('ds_lead_submitted') === '1') {
+    if (localStorage.getItem('dc_lead_submitted') === '1') {
       setShowPayment(true);
     } else {
       setShowLead(true);
@@ -827,9 +804,10 @@ function MobileApp() {
 
         {/* Final CTA */}
         <section className="pt-2 pb-8">
-          <div className="rounded-3xl overflow-hidden" style={{ background: T.CARD_BG, border: '1px solid rgba(25,68,241,0.22)', boxShadow: `0 0 40px ${B1}15` }}>
+          <div className="rounded-3xl overflow-hidden" style={{ background: T.CARD_BG, border: '1px solid rgba(37,211,102,0.22)', boxShadow: `0 0 40px ${B1}15` }}>
             <div className="h-[3px]" style={{ background: HERO_GRAD }} />
             <div className="px-5 py-5 flex flex-col items-center text-center gap-4">
+              <div className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest" style={{ color: T.isDark ? B1 : B2, background: T.isDark ? 'rgba(37,211,102,.12)' : '#E8F9EE', border: '1px solid rgba(37,211,102,.32)' }}><Sparkles className="w-3 h-3" /> Launch Offer</div>
 
 
               {/* Price */}
@@ -848,7 +826,7 @@ function MobileApp() {
                   animate={{ x: ['-100%', '100%'] }}
                   transition={{ duration: 2.2, repeat: Infinity, repeatDelay: 2, ease: 'easeInOut' }}
                   style={{ background: 'rgba(255,255,255,0.12)' }} />
-                <span className="text-sm tracking-tight relative z-10">Join Datespot Now</span>
+                <span className="text-sm tracking-tight relative z-10">Join Dating Club Now</span>
                 <ArrowRight className="w-4 h-4 relative z-10" />
               </motion.button>
 
@@ -933,14 +911,14 @@ export default function App() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const [entered, setEntered] = useState(() => localStorage.getItem('ds_lead_submitted') === '1');
+  const [entered, setEntered] = useState(() => localStorage.getItem('dc_lead_submitted') === '1');
   if (!entered) {
     return (
       <ThemeProvider>
         <div className="min-h-screen w-full relative" style={{
           backgroundColor: '#000000',
           backgroundImage:
-            'radial-gradient(ellipse 60% 50% at 50% 45%, rgba(25,68,241,0.18), transparent 70%), radial-gradient(rgba(255,255,255,0.16) 1px, transparent 1.2px)',
+            'radial-gradient(ellipse 60% 50% at 50% 45%, rgba(37,211,102,0.18), transparent 70%), radial-gradient(rgba(255,255,255,0.16) 1px, transparent 1.2px)',
           backgroundSize: '100% 100%, 24px 24px',
         }}>
           <LeadModal gate onComplete={() => setEntered(true)} />
@@ -964,7 +942,7 @@ function DesktopWrapper() {
   const [paymentType, setPaymentType] = useState<'full' | 'demo'>('full');
   const handleJoin = (type: 'full' | 'demo') => {
     setPaymentType(type);
-    if (localStorage.getItem('ds_lead_submitted') === '1') {
+    if (localStorage.getItem('dc_lead_submitted') === '1') {
       setShowPayment(true);
     } else {
       setShowLead(true);
@@ -1005,8 +983,8 @@ function DesktopHero() {
       <div className="grid grid-cols-2 gap-6 lg:gap-12 xl:gap-16 items-center">
         <div className="min-w-0">
           <div className="inline-flex items-center rounded-full px-4 py-2 text-xs font-extrabold uppercase tracking-widest mb-7"
-            style={{ color: B1, background: T.isDark ? 'rgba(25,68,241,.13)' : '#FFFFFF', border: '1px solid rgba(25,68,241,.22)' }}>
-            Datespot · Bangalore
+            style={{ color: B1, background: T.isDark ? 'rgba(37,211,102,.13)' : '#FFFFFF', border: '1px solid rgba(37,211,102,.22)' }}>
+            Dating Club · Bangalore
           </div>
           <h1 className="font-black leading-[1.1] mb-7"
             style={{ color: T.DARK, fontSize: 'clamp(36px,4.1vw,60px)', letterSpacing: '-0.05em' }}>
@@ -1026,7 +1004,7 @@ function DesktopHero() {
                 <div key={item.label} className="flex items-center gap-2.5 text-xs lg:text-sm font-bold"
                   style={{ color: T.DARK }}>
                   <span className="w-9 h-9 rounded-xl inline-flex items-center justify-center"
-                    style={{ background: T.isDark ? 'rgba(25,68,241,.22)' : '#E8EEFF' }}>
+                    style={{ background: T.isDark ? 'rgba(37,211,102,.22)' : '#E8F9EE' }}>
                     <Icon className="w-4 h-4" style={{ color: B1 }} />
                   </span>
                   {item.label}
@@ -1058,7 +1036,7 @@ function DesktopHero() {
               </span>
               <button type="button" onClick={() => changePreview(-1)} aria-label="Previous group preview"
                 className="w-9 h-9 rounded-full flex items-center justify-center transition-transform hover:scale-105 active:scale-95"
-                style={{ color: B1, background: T.CARD_BG, border: '1px solid rgba(25,68,241,.26)' }}>
+                style={{ color: B1, background: T.CARD_BG, border: '1px solid rgba(37,211,102,.26)' }}>
                 <ChevronDown className="w-4 h-4 rotate-90" />
               </button>
               <button type="button" onClick={() => changePreview(1)} aria-label="Next group preview"
@@ -1072,7 +1050,7 @@ function DesktopHero() {
           <div className="relative w-full h-[clamp(245px,28vw,355px)] mt-2" aria-label="Rotating group photo previews">
             <div aria-hidden="true" className="pointer-events-none absolute rounded-full"
               style={{ width: '79%', height: '78%', left: '11%', top: '11%',
-                background: T.isDark ? 'rgba(25,68,241,.11)' : 'rgba(25,68,241,.055)' }} />
+                background: T.isDark ? 'rgba(37,211,102,.11)' : 'rgba(37,211,102,.055)' }} />
             {IMAGES.map((src, i) => {
               const half = Math.floor(IMAGES.length / 2);
               const offset = ((i - previewIndex + IMAGES.length + half) % IMAGES.length) - half;
@@ -1093,11 +1071,11 @@ function DesktopHero() {
                     opacity: visible ? (distance === 2 ? .9 : 1) : 0,
                     zIndex: visible ? 10 - distance : 0,
                     pointerEvents: visible ? 'auto' : 'none',
-                    background: '#101729',
+                    background: '#0B2112',
                     border: offset === 0 ? `2px solid ${B1}` : '2px solid rgba(255,255,255,.8)',
                     boxShadow: offset === 0
-                      ? '0 14px 30px rgba(25,68,241,.22)'
-                      : '0 8px 22px rgba(14,25,62,.13)',
+                      ? '0 14px 30px rgba(37,211,102,.22)'
+                      : '0 8px 22px rgba(10,40,24,.13)',
                   }}>
                   <img src={src} alt={`Group preview ${i + 1}`}
                     className="block w-full h-full object-cover" loading={distance < 2 ? 'eager' : 'lazy'} />
@@ -1113,7 +1091,7 @@ function DesktopHero() {
                 aria-current={i === previewIndex ? 'true' : undefined}
                 className="rounded-full transition-all duration-300"
                 style={{ width: i === previewIndex ? 18 : 7, height: 7,
-                  background: i === previewIndex ? B1 : (T.isDark ? '#47547D' : '#C5D2F9') }} />
+                  background: i === previewIndex ? B1 : (T.isDark ? '#5C9270' : '#BDE9CD') }} />
             ))}
           </div>
         </div>
@@ -1127,7 +1105,7 @@ function DesktopFAQ() {
   const T = useT();
   const [open, setOpen] = useState<number | null>(0);
   const items = [
-    { q: 'Is Datespot genuine?', a: 'Datespot is a Bangalore-based Telegram community. The community has guidelines and an admin-led onboarding process.' },
+    { q: 'Is Dating Club genuine?', a: 'Dating Club is a Bangalore-based Telegram community. The community has guidelines and an admin-led onboarding process.' },
     { q: 'How do I get access?', a: `Enter your details, make the ${formatPrice(PRICING.desktop.amount)} UPI payment and upload your payment screenshot to continue to the Telegram invitation.` },
     { q: 'What is included in membership?', a: 'Membership includes the group chat, voice calls, opportunities for direct meets and exclusive 18+ content.' },
     { q: 'Can I use any UPI app?', a: 'You can scan the QR code or use the UPI ID shown on the payment screen with a compatible UPI app.' },
@@ -1177,11 +1155,12 @@ function DesktopVersion({ onOpenPayment, showPayment, onClosePayment, paymentTyp
       <ThemeToggle />
       <DesktopHero />
 
-      {/* Desktop-only join CTA, with no sale or discount promotion. */}
+      {/* Desktop-only launch offer CTA. */}
       <section className="relative max-w-7xl mx-auto px-8 pt-10 pb-16 text-center isolate">
         <div aria-hidden="true" className="pointer-events-none absolute -z-10 rounded-[50%]"
           style={{ width: '92%', height: 230, left: '4%', top: 115,
-            background: T.isDark ? 'rgba(25,68,241,.075)' : 'rgba(25,68,241,.045)' }} />
+            background: T.isDark ? 'rgba(37,211,102,.075)' : 'rgba(37,211,102,.045)' }} />
+        <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-5 text-xs font-extrabold uppercase tracking-widest" style={{ color: T.isDark ? B1 : B2, background: T.isDark ? 'rgba(37,211,102,.12)' : '#E8F9EE', border: '1px solid rgba(37,211,102,.28)' }}><Sparkles className="w-4 h-4" /> Launch Offer</div>
         <h2 className="font-black text-4xl mb-2" style={{ color: T.DARK, letterSpacing: '-0.04em' }}>Ready to Join?</h2>
         <div className="flex items-baseline gap-3 justify-center mb-5">
           <span className="text-lg line-through font-semibold" style={{ color: T.MUTED }}>{formatPrice(PRICING.desktop.original)}</span>
@@ -1189,8 +1168,8 @@ function DesktopVersion({ onOpenPayment, showPayment, onClosePayment, paymentTyp
         </div>
         <button type="button" onClick={() => onOpenPayment('full')}
           className="w-full max-w-[360px] rounded-2xl font-extrabold text-white text-base inline-flex items-center justify-center gap-3 px-10 py-4 transition-transform hover:scale-[1.02] active:scale-[.98]"
-          style={{ background: B1, boxShadow: '0 8px 22px rgba(25,68,241,.18)' }}>
-          Join Datespot Now <ArrowRight className="w-5 h-5" />
+          style={{ background: B1, boxShadow: '0 8px 22px rgba(37,211,102,.18)' }}>
+          Join Dating Club Now <ArrowRight className="w-5 h-5" />
         </button>
       </section>
 
@@ -1256,7 +1235,7 @@ function DesktopVersion({ onOpenPayment, showPayment, onClosePayment, paymentTyp
               <div className="absolute top-0 left-0 w-1 h-full rounded-l-2xl"
                 style={{ background: `${avatarColors[i % avatarColors.length]}` }} />
               <div className="flex gap-0.5 mb-2 ml-1">
-                {[...Array(5)].map((_, j) => <Star key={j} className="w-2.5 h-2.5 fill-current" style={{ color: '#F59E0B' }} />)}
+                {[...Array(5)].map((_, j) => <Star key={j} className="w-2.5 h-2.5 fill-current" style={{ color: '#25D366' }} />)}
               </div>
               <p className="text-sm leading-relaxed mb-3 font-medium ml-1" style={{ color: T.QUOTE }}>"{review.text}"</p>
               <div className="flex items-center gap-2 ml-1">
@@ -1282,9 +1261,9 @@ function DesktopVersion({ onOpenPayment, showPayment, onClosePayment, paymentTyp
       </section>
 
       {/* Footer */}
-      <footer className="max-w-7xl mx-auto px-8 py-8 text-center" style={{ borderTop: `1px solid rgba(25,68,241,0.2)` }}>
+      <footer className="max-w-7xl mx-auto px-8 py-8 text-center" style={{ borderTop: `1px solid rgba(37,211,102,0.2)` }}>
         <p className="text-sm font-semibold" style={{ color: T.MUTED }}>
-          © 2026 Datespot Bangalore · One-time payment · Lifetime access · No hidden fees
+          © 2026 Dating Club Bangalore · One-time payment · Lifetime access · No hidden fees
         </p>
       </footer>
 
@@ -1334,7 +1313,7 @@ function ChatOverlay({ onClose, onOpenPayment }: { onClose: () => void; onOpenPa
         transition={{ type: 'spring', damping: 30, stiffness: 300 }}
         className="relative w-full max-w-md mx-auto h-[82vh] rounded-t-3xl shadow-2xl flex flex-col overflow-hidden"
         style={{ background: CARD_BG }}>
-        <div className="p-3.5 flex items-center gap-3" style={{ borderBottom: '1px solid rgba(25,68,241,0.15)', background: PAGE_BG }}>
+        <div className="p-3.5 flex items-center gap-3" style={{ borderBottom: '1px solid rgba(37,211,102,0.15)', background: PAGE_BG }}>
           <div className="relative">
             <img src={chatAvatar} alt="Komal" className="w-10 h-10 rounded-full object-cover border-2" style={{ borderColor: B1 }} />
             <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-400 border-2 border-white rounded-full" />
@@ -1343,7 +1322,7 @@ function ChatOverlay({ onClose, onOpenPayment }: { onClose: () => void; onOpenPa
             <div className="font-bold text-sm" style={{ color: DARK }}>Komal</div>
             <div className="text-[10px] font-semibold" style={{ color: B1 }}>Admin · Online now</div>
           </div>
-          <button onClick={onClose} className="p-2 rounded-full" style={{ background: 'rgba(25,68,241,0.07)' }}>
+          <button onClick={onClose} className="p-2 rounded-full" style={{ background: 'rgba(37,211,102,0.07)' }}>
             <X className="w-4 h-4" style={{ color: MUTED }} />
           </button>
         </div>
@@ -1365,7 +1344,7 @@ function ChatOverlay({ onClose, onOpenPayment }: { onClose: () => void; onOpenPa
                   <div className="px-3.5 py-2.5 text-xs shadow-sm"
                     style={msg.sender === 'user'
                       ? { background: HERO_GRAD, color: 'white', borderRadius: '18px 18px 4px 18px' }
-                      : { background: '#050A1A', color: DARK, border: '1px solid rgba(25,68,241,0.2)', borderRadius: '18px 18px 18px 4px' }}>
+                      : { background: '#0D160F', color: DARK, border: '1px solid rgba(37,211,102,0.2)', borderRadius: '18px 18px 18px 4px' }}>
                     {msg.type === 'text' ? <p>{msg.content}</p> : <VoiceMessageBubble audioSrc={msg.audioSrc} isUser={msg.sender === 'user'} />}
                     <div className="text-[8px] mt-1 opacity-40">{msg.time}</div>
                   </div>
@@ -1376,7 +1355,7 @@ function ChatOverlay({ onClose, onOpenPayment }: { onClose: () => void; onOpenPa
           {isTyping && (
             <div className="flex gap-2">
               <img src={chatAvatar} alt="Komal" className="w-6 h-6 rounded-full object-cover shrink-0" />
-              <div className="px-3.5 py-2.5 rounded-2xl flex gap-0.5 shadow-sm" style={{ background: '#050A1A', border: '1px solid rgba(25,68,241,0.2)' }}>
+              <div className="px-3.5 py-2.5 rounded-2xl flex gap-0.5 shadow-sm" style={{ background: '#0D160F', border: '1px solid rgba(37,211,102,0.2)' }}>
                 {[0, 1, 2].map(i => (
                   <motion.div key={i} className="w-1.5 h-1.5 rounded-full" style={{ background: B1 }}
                     animate={{ scale: [1, 1.4, 1], opacity: [0.4, 1, 0.4] }}
@@ -1388,13 +1367,13 @@ function ChatOverlay({ onClose, onOpenPayment }: { onClose: () => void; onOpenPa
           <div ref={bottomRef} />
         </div>
 
-        <div className="p-4" style={{ background: CARD_BG, borderTop: '1px solid rgba(25,68,241,0.15)' }}>
+        <div className="p-4" style={{ background: CARD_BG, borderTop: '1px solid rgba(37,211,102,0.15)' }}>
           <p className="text-[9px] font-bold mb-2.5 text-center uppercase tracking-widest" style={{ color: MUTED }}>Tap to ask</p>
           <div className="space-y-1.5">
             {QUESTIONS.map((q, i) => (
               <button key={i} onClick={() => handleAsk(q, i)}
                 className="w-full px-3.5 py-2.5 rounded-xl text-left text-xs font-semibold transition-all active:scale-[0.98]"
-                style={{ background: '#050A1A', border: '1.5px solid rgba(25,68,241,0.2)', color: DARK }}>
+                style={{ background: '#0D160F', border: '1.5px solid rgba(37,211,102,0.2)', color: DARK }}>
                 {q}
               </button>
             ))}
@@ -1466,7 +1445,7 @@ function PaymentModal({ onClose, paymentType, device }: { onClose: () => void; p
   const UPI_ID        = 'BHARATPE2R0S0C1D6V46619@unitype';
   const { amount: AMOUNT, original: ORIGINAL_AMT } = PRICING[device];
   const TELEGRAM_LINK = 'https://t.me/+wRAGkbTVLLA0YzQ1';
-  const upiUrl        = `upi://pay?pa=${UPI_ID}&pn=Datespot&am=${AMOUNT}&cu=INR`;
+  const upiUrl        = `upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent('Dating Club')}&am=${AMOUNT}&cu=INR`;
 
   const [uploadState, setUploadState] = useState<UploadState>('idle');
   const [tab, setTab] = useState<'qr' | 'upi'>('qr');
@@ -1504,8 +1483,8 @@ function PaymentModal({ onClose, paymentType, device }: { onClose: () => void; p
 
     try {
       const base64 = await compressImage(file);
-      const name  = localStorage.getItem('ds_lead_name')  ?? '';
-      const phone = localStorage.getItem('ds_lead_phone') ?? '';
+      const name  = localStorage.getItem('dc_lead_name')  ?? '';
+      const phone = localStorage.getItem('dc_lead_phone') ?? '';
       await fetch(SHEET_URL, {
         method: 'POST',
         mode: 'no-cors',
@@ -1519,7 +1498,7 @@ function PaymentModal({ onClose, paymentType, device }: { onClose: () => void; p
     setTimeout(() => {
       setUploadState('success');
       toast.success('Payment verified! Welcome!');
-      confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 }, colors: [B1, B2, '#fff', '#FF6B6B'] });
+      confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 }, colors: [B1, B2, '#fff', '#3DAF78'] });
       setTimeout(() => window.open(TELEGRAM_LINK, '_blank'), 1200);
     }, 2500);
   };
@@ -1539,11 +1518,11 @@ function PaymentModal({ onClose, paymentType, device }: { onClose: () => void; p
 
         {/* Header */}
         <div className="px-4 pt-4 pb-3 flex items-center gap-2.5">
-          <img src="/datespot-logo.svg" alt="Datespot logo"
+          <img src="/dating-club-logo.svg" alt="Dating Club logo"
             className="w-10 h-10 rounded-xl shrink-0 object-cover" />
           <div className="flex-1 min-w-0">
-            <div className="font-bold text-sm leading-none text-gray-900">Join Datespot</div>
-            <div className="text-[10px] mt-0.5 font-medium text-gray-400">Lifetime access · Telegram</div>
+            <div className="font-bold text-sm leading-none text-gray-900">Join Dating Club</div>
+            <div className="text-[10px] mt-0.5 font-medium text-gray-400">Launch offer · Lifetime Telegram access</div>
           </div>
           <div className="text-right shrink-0 mr-7">
             {ORIGINAL_AMT && <div className="text-[11px] line-through text-gray-400">{formatPrice(ORIGINAL_AMT)}</div>}
@@ -1554,21 +1533,21 @@ function PaymentModal({ onClose, paymentType, device }: { onClose: () => void; p
         <div className="px-4 pb-4">
           {uploadState === 'idle' && (
             <>
-              {/* Neutral payment details; no discount or sale expiry claims. */}
-              <div className="flex items-center justify-between gap-2 px-3 py-2 rounded-xl mb-3" style={{ background: '#EEF2FF', border: '1px solid #D6DFFF' }}>
+              {/* UPI payment details; countdown does not affect the launch offer. */}
+              <div className="flex items-center justify-between gap-2 px-3 py-2 rounded-xl mb-3" style={{ background: '#E8F9EE', border: '1px solid #C6EAD3' }}>
                 <div className="flex items-center gap-2 min-w-0">
                   <CreditCard className="w-3.5 h-3.5 shrink-0" style={{ color: B1 }} />
                   <p className="text-[10px] font-black uppercase tracking-wide" style={{ color: B1 }}>Secure UPI Payment</p>
                 </div>
                 <span aria-label={`Countdown ${countdown}`} role="timer"
                   className="text-[12px] font-extrabold tabular-nums rounded-md px-2 py-1 shrink-0"
-                  style={{ background: '#FFFFFF', border: '1px solid #D6DFFF', color: '#475569' }}>{countdown}</span>
+                  style={{ background: '#FFFFFF', border: '1px solid #C6EAD3', color: '#52695A' }}>{countdown}</span>
               </div>
-              <div className="flex rounded-xl p-1 mb-3" style={{ background: '#F1F4FA' }}>
+              <div className="flex rounded-xl p-1 mb-3" style={{ background: '#F0F8F3' }}>
                 {(['qr', 'upi'] as const).map(t => (
                   <button key={t} onClick={() => setTab(t)}
                     className="flex-1 py-2 rounded-xl text-xs font-bold transition-all"
-                    style={tab === t ? { background: B1, color: '#FFFFFF' } : { background: 'transparent', color: '#64748B' }}>
+                    style={tab === t ? { background: B1, color: '#FFFFFF' } : { background: 'transparent', color: '#647B6D' }}>
                     {t === 'qr' ? 'Scan QR' : 'UPI ID'}
                   </button>
                 ))}
@@ -1577,15 +1556,15 @@ function PaymentModal({ onClose, paymentType, device }: { onClose: () => void; p
               <AnimatePresence mode="wait">
                 {tab === 'qr' ? (
                   <motion.div key="qr" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                    <div className="rounded-2xl p-3 mb-2 flex items-center justify-center" style={{ background: '#F8FAFC' }}>
+                    <div className="rounded-2xl p-3 mb-2 flex items-center justify-center" style={{ background: '#F7FBF8' }}>
                       <QRCodeSVG value={upiUrl} size={148} level="H" />
                     </div>
-                    <p className="text-center text-[10px] mb-2 font-medium" style={{ color: "#475569" }}>Scan with any UPI app</p>
+                    <p className="text-center text-[10px] mb-2 font-medium" style={{ color: "#52695A" }}>Scan with any UPI app</p>
                   </motion.div>
                 ) : (
                   <motion.div key="upi" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="mb-3">
-                    <div className="rounded-2xl p-4 mb-2" style={{ background: '#F8FAFC' }}>
-                      <p className="text-xs font-bold uppercase tracking-wide mb-1.5" style={{ color: "#475569" }}>UPI ID</p>
+                    <div className="rounded-2xl p-4 mb-2" style={{ background: '#F7FBF8' }}>
+                      <p className="text-xs font-bold uppercase tracking-wide mb-1.5" style={{ color: "#52695A" }}>UPI ID</p>
                       <p className="font-mono text-sm font-bold break-all mb-4 text-gray-800">{UPI_ID}</p>
                       <div className="flex gap-2">
                         <button onClick={() => { navigator.clipboard.writeText(UPI_ID); toast.success('Copied!'); }}
@@ -1606,7 +1585,7 @@ function PaymentModal({ onClose, paymentType, device }: { onClose: () => void; p
               </AnimatePresence>
 
               {/* UPI apps accepted: reference image */}
-              <div className="rounded-lg px-2 py-1 mb-2 max-w-[220px] mx-auto" style={{ background: '#FFFFFF', border: '1px solid #E2E8F0' }}>
+              <div className="rounded-lg px-2 py-1 mb-2 max-w-[220px] mx-auto" style={{ background: '#FFFFFF', border: '1px solid #DDEBE2' }}>
                 <img
                   src="/upi-apps-accepted.webp"
                   alt="UPI, Paytm, Google Pay and PhonePe accepted"
@@ -1616,7 +1595,7 @@ function PaymentModal({ onClose, paymentType, device }: { onClose: () => void; p
               </div>
 
               <div className="pt-3 mt-1" style={{ borderTop: `1px solid ${B1}12` }}>
-                <p className="text-center text-[10px] mb-2 font-medium" style={{ color: "#475569" }}>Upload screenshot to verify payment</p>
+                <p className="text-center text-[10px] mb-2 font-medium" style={{ color: "#52695A" }}>Upload screenshot to verify payment</p>
                 <input type="file" id="ss-upload" className="hidden" accept="image/*" onChange={handleFileChange} />
                 <label htmlFor="ss-upload"
                   className="flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl text-white font-bold text-sm cursor-pointer active:scale-95 transition-transform"

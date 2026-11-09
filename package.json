@@ -1,12 +1,12 @@
 {
-  "name": "@figma/my-make-file",
+  "name": "dating-club",
   "private": true,
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "build": "vite build --config vite.figma.config.ts",
-    "dev": "vite --host 0.0.0.0 --config vite.figma.config.ts",
-    "preview": "vite preview --config vite.figma.config.ts",
+    "build": "vite build",
+    "dev": "vite --host 0.0.0.0",
+    "preview": "vite preview --host 0.0.0.0",
     "format": "oxfmt"
   },
   "dependencies": {
