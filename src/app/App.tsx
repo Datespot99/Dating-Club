@@ -1537,7 +1537,7 @@ function PaymentModal({ onClose, paymentType, device }: { onClose: () => void; p
               <div className="flex items-center justify-between gap-2 px-3 py-2 rounded-xl mb-3" style={{ background: '#E8F9EE', border: '1px solid #C6EAD3' }}>
                 <div className="flex items-center gap-2 min-w-0">
                   <CreditCard className="w-3.5 h-3.5 shrink-0" style={{ color: B1 }} />
-                  <p className="text-[10px] font-black uppercase tracking-wide" style={{ color: B1 }}>Secure UPI Payment</p>
+                  <p className="text-[10px] font-black uppercase tracking-wide" style={{ color: "#000000" }}>Secure UPI Payment</p>
                 </div>
                 <span aria-label={`Countdown ${countdown}`} role="timer"
                   className="text-[12px] font-extrabold tabular-nums rounded-md px-2 py-1 shrink-0"
