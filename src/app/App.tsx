@@ -66,7 +66,7 @@ const useT = (): TTheme => React.useContext(ThemeCtx).theme;
 // Dot-grid page background (subtle dots in both green themes)
 const dotGridStyle = (T: TTheme): React.CSSProperties => ({
   backgroundColor: T.DOT_BG,
-  backgroundImage: `radial-gradient(${T.isDark ? 'rgba(255,255,255,0.14)' : 'rgba(37,211,102,0.20)'} 1px, transparent 1.2px)`,
+  backgroundImage: `radial-gradient(${T.isDark ? 'rgba(255,255,255,0.14)' : 'rgba(18,140,126,0.30)'} 1px, transparent 1.2px)`,
   backgroundSize: '24px 24px',
 });
 
