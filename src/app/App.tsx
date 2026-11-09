@@ -63,7 +63,7 @@ const ThemeCtx = React.createContext<{ theme: TTheme; toggle: () => void }>({
   theme: { ...DARK_THEME, isDark: true }, toggle: () => {},
 });
 const useT = (): TTheme => React.useContext(ThemeCtx).theme;
-// Dot-grid page background (white dots on dark, blue dots on light)
+// Dot-grid page background (subtle dots in both green themes)
 const dotGridStyle = (T: TTheme): React.CSSProperties => ({
   backgroundColor: T.DOT_BG,
   backgroundImage: `radial-gradient(${T.isDark ? 'rgba(255,255,255,0.14)' : 'rgba(37,211,102,0.20)'} 1px, transparent 1.2px)`,
@@ -173,7 +173,7 @@ function GroupPreviewSlider({ images, mobile = false }: { images: string[]; mobi
             <h2 className="font-extrabold text-xl" style={{ color: T.DARK, letterSpacing: '-0.03em' }}>Group Preview</h2>
             <p className="text-xs font-semibold mt-0.5" style={{ color: T.MUTED }}>Swipe for screenshots </p>
           </div>
-          <span className="text-[10px] font-bold px-3 py-1.5 rounded-full text-white" style={{ background: HERO_GRAD }}>
+          <span className="text-[10px] font-bold px-3 py-1.5 rounded-full text-white" style={{ background: HERO_GRAD, color: '#063C20' }}>
             {current + 1} / {images.length}
           </span>
         </div>
@@ -756,10 +756,10 @@ function StickyCTA({ onJoin }: { onJoin: () => void }) {
               transition={{ duration: 2, repeat: Infinity, repeatDelay: 1.4, ease: 'easeInOut' }}
               style={{ background: 'rgba(255,255,255,0.14)', width: '60%' }} />
             <div className="relative flex items-center justify-center gap-3 py-3.5 px-6">
-              <span className="font-black text-white text-sm tracking-tight">Join Dating Club</span>
-              <span className="text-white/75 text-[11px] line-through font-semibold">{formatPrice(PRICING.mobile.original)}</span>
-              <span className="font-black text-white text-sm">{formatPrice(PRICING.mobile.amount)}</span>
-              <ArrowRight className="w-4 h-4 text-white" />
+              <span className="font-black text-sm tracking-tight" style={{ color: '#063C20' }}>Join Dating Club</span>
+              <span className="text-[11px] line-through font-semibold" style={{ color: '#175B34' }}>{formatPrice(PRICING.mobile.original)}</span>
+              <span className="font-black text-sm" style={{ color: '#063C20' }}>{formatPrice(PRICING.mobile.amount)}</span>
+              <ArrowRight className="w-4 h-4" style={{ color: '#063C20' }} />
             </div>
           </motion.button>
         </motion.div>
@@ -813,15 +813,15 @@ function MobileApp() {
               {/* Price */}
               <div className="flex items-baseline gap-2 justify-center">
                 <span className="text-sm line-through font-semibold" style={{ color: T.MUTED }}>{formatPrice(PRICING.mobile.original)}</span>
-                <span className="font-black text-4xl leading-none" style={{ color: B1 }}>{formatPrice(PRICING.mobile.amount)}</span>
+                <span className="font-black text-4xl leading-none" style={{ color: T.isDark ? B1 : B2 }}>{formatPrice(PRICING.mobile.amount)}</span>
               </div>
 
               {/* CTA Button */}
               <motion.button
                 whileTap={{ scale: 0.97 }}
                 onClick={() => handleJoin('full')}
-                className="w-full rounded-xl font-black text-white flex items-center justify-center gap-2 relative overflow-hidden"
-                style={{ background: HERO_GRAD, boxShadow: `0 6px 24px ${B1}50`, padding: '14px 20px' }}>
+                className="w-full rounded-xl font-black flex items-center justify-center gap-2 relative overflow-hidden"
+                style={{ background: HERO_GRAD, color: '#063C20', boxShadow: `0 6px 24px ${B1}50`, padding: '14px 20px' }}>
                 <motion.div className="absolute inset-0"
                   animate={{ x: ['-100%', '100%'] }}
                   transition={{ duration: 2.2, repeat: Infinity, repeatDelay: 2, ease: 'easeInOut' }}
@@ -1164,11 +1164,11 @@ function DesktopVersion({ onOpenPayment, showPayment, onClosePayment, paymentTyp
         <h2 className="font-black text-4xl mb-2" style={{ color: T.DARK, letterSpacing: '-0.04em' }}>Ready to Join?</h2>
         <div className="flex items-baseline gap-3 justify-center mb-5">
           <span className="text-lg line-through font-semibold" style={{ color: T.MUTED }}>{formatPrice(PRICING.desktop.original)}</span>
-          <span className="font-black text-5xl leading-none" style={{ color: B1 }}>{formatPrice(PRICING.desktop.amount)}</span>
+          <span className="font-black text-5xl leading-none" style={{ color: T.isDark ? B1 : B2 }}>{formatPrice(PRICING.desktop.amount)}</span>
         </div>
         <button type="button" onClick={() => onOpenPayment('full')}
-          className="w-full max-w-[360px] rounded-2xl font-extrabold text-white text-base inline-flex items-center justify-center gap-3 px-10 py-4 transition-transform hover:scale-[1.02] active:scale-[.98]"
-          style={{ background: B1, boxShadow: '0 8px 22px rgba(37,211,102,.18)' }}>
+          className="w-full max-w-[360px] rounded-2xl font-extrabold text-base inline-flex items-center justify-center gap-3 px-10 py-4 transition-transform hover:scale-[1.02] active:scale-[.98]"
+          style={{ background: B1, color: '#063C20', boxShadow: '0 8px 22px rgba(37,211,102,.18)' }}>
           Join Dating Club Now <ArrowRight className="w-5 h-5" />
         </button>
       </section>
@@ -1526,7 +1526,7 @@ function PaymentModal({ onClose, paymentType, device }: { onClose: () => void; p
           </div>
           <div className="text-right shrink-0 mr-7">
             {ORIGINAL_AMT && <div className="text-[11px] line-through text-gray-400">{formatPrice(ORIGINAL_AMT)}</div>}
-            <div className="font-extrabold text-2xl leading-none" style={{ color: B1 }}>{formatPrice(AMOUNT)}</div>
+            <div className="font-extrabold text-2xl leading-none" style={{ color: B2 }}>{formatPrice(AMOUNT)}</div>
           </div>
         </div>
 
@@ -1547,7 +1547,7 @@ function PaymentModal({ onClose, paymentType, device }: { onClose: () => void; p
                 {(['qr', 'upi'] as const).map(t => (
                   <button key={t} onClick={() => setTab(t)}
                     className="flex-1 py-2 rounded-xl text-xs font-bold transition-all"
-                    style={tab === t ? { background: B1, color: '#FFFFFF' } : { background: 'transparent', color: '#647B6D' }}>
+                    style={tab === t ? { background: B1, color: '#063C20' } : { background: 'transparent', color: '#647B6D' }}>
                     {t === 'qr' ? 'Scan QR' : 'UPI ID'}
                   </button>
                 ))}
@@ -1573,7 +1573,7 @@ function PaymentModal({ onClose, paymentType, device }: { onClose: () => void; p
                           <Copy className="w-3.5 h-3.5" /> Copy
                         </button>
                         <a href={upiUrl}
-                          className="flex-1 py-3 rounded-xl font-bold text-sm text-white flex items-center justify-center gap-1.5 active:scale-95 transition-transform"
+                          className="flex-1 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-1.5 active:scale-95 transition-transform"
                           style={{ background: HERO_GRAD }}
                           onClick={() => toast.success('Opening UPI app...')}>
                           <ExternalLink className="w-3.5 h-3.5" /> Pay
@@ -1598,8 +1598,8 @@ function PaymentModal({ onClose, paymentType, device }: { onClose: () => void; p
                 <p className="text-center text-[10px] mb-2 font-medium" style={{ color: "#52695A" }}>Upload screenshot to verify payment</p>
                 <input type="file" id="ss-upload" className="hidden" accept="image/*" onChange={handleFileChange} />
                 <label htmlFor="ss-upload"
-                  className="flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl text-white font-bold text-sm cursor-pointer active:scale-95 transition-transform"
-                  style={{ background: B1 }}>
+                  className="flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl font-bold text-sm cursor-pointer active:scale-95 transition-transform"
+                  style={{ background: B1, color: '#063C20' }}>
                   <Upload className="w-4 h-4" /> Upload Screenshot
                 </label>
               </div>
