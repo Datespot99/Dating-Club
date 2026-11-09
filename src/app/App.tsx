@@ -795,6 +795,12 @@ function MobileApp() {
 
       {/* Main Content */}
       <div className="max-w-md mx-auto px-4">
+        <header className="pt-12 pb-6">
+          <h1 className="text-[32px] leading-[1.15] font-black tracking-tight mb-2" style={{ color: T.DARK }}>
+            Intrested in <span style={{ color: B1 }}>Dating &amp; hookups</span>
+          </h1>
+          <p className="text-lg font-bold" style={{ color: T.DARK }}>with bangalore women</p>
+        </header>
 
         {/* Stats */}
         <StatsSection />
@@ -986,10 +992,13 @@ function DesktopHero() {
             style={{ color: B1, background: T.isDark ? 'rgba(37,211,102,.13)' : '#FFFFFF', border: '1px solid rgba(37,211,102,.22)' }}>
             Dating Club · Bangalore
           </div>
-          <h1 className="font-black leading-[1.1] mb-7"
+          <h1 className="font-black leading-[1.1] mb-3"
             style={{ color: T.DARK, fontSize: 'clamp(36px,4.1vw,60px)', letterSpacing: '-0.05em' }}>
-            Meet people. <span style={{ color: B1 }}>Make connections.</span>
+            Intrested in <span style={{ color: B1 }}>Dating &amp; hookups</span>
           </h1>
+          <p className="text-xl lg:text-2xl font-bold mb-5" style={{ color: T.DARK }}>
+            with bangalore women
+          </p>
           <p className="text-base lg:text-lg leading-relaxed max-w-lg mb-8" style={{ color: T.MUTED }}>
             Discover a Telegram community with group chats, voice calls and opportunities to meet in person.
           </p>
